@@ -1,4 +1,4 @@
-package br.com.lucas.bookstoremanager.adapter.controller.mapper.response;
+package br.com.lucas.bookstoremanager.adapter.controller.mapper;
 
 import br.com.lucas.bookstoremanager.adapter.controller.entity.BookRequest;
 import br.com.lucas.bookstoremanager.adapter.controller.entity.BookResponse;
@@ -7,10 +7,11 @@ import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring")
-public abstract class BookMapper {
-    public static final BookMapper INSTANCE = Mappers.getMapper(BookMapper.class);
+public interface BookMapper {
 
-    public abstract BookResponse toResponse(Book book);
-    public abstract Book toEntity(BookRequest bookRequest);
+    BookMapper INSTANCE = Mappers.getMapper(BookMapper.class);
+
+    BookResponse toResponse(Book book);
+    Book toEntity(BookRequest bookRequest);
 
 }

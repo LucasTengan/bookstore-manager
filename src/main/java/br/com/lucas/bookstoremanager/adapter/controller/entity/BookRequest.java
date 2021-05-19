@@ -4,24 +4,26 @@ import br.com.lucas.bookstoremanager.domain.entity.Author;
 import lombok.Builder;
 import lombok.Data;
 
-import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Data
 @Builder
 public class BookRequest {
 
-    @Column(nullable = false, unique = true)
+    @NotBlank
+    @Size(max = 200)
     private String name;
-    @Column(nullable = false)
+    @NotNull
     private Integer pages;
-    @Column(nullable = false)
+    @NotNull
     private Integer chapters;
-    @Column(nullable = false)
+    @NotBlank @Size(max = 100)
     private String isbn;
-    @Column(name = "publisher_name", nullable = false, unique = true)
+    @NotBlank @Size(max = 200)
     private String publisherName;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
-    // Para fazer a consulta dos autores de um livro, ele precisa, antes, fazer uma consulta com um join para retornar o dado -> ganho de performance
-    @JoinColumn(name = "author_id")
+    @NotNull @Valid
     private Author author;
 }
